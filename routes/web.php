@@ -11,11 +11,15 @@
 |
 */
 
+Auth::routes();
+
 Route::get('/', function () {
     $events = \App\Event::all();
     return view('listing', ['events' => $events]);
 });
 
-Auth::routes();
+Route::get('/submit', function () {
+    return view('submit');
+});
 
 Route::get('/home', 'HomeController@index')->name('home');
