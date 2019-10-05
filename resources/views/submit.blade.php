@@ -20,10 +20,24 @@
                         @endif
                     </div>
                     <div class="form-group{{ $errors->has('date') ? ' has-error' : '' }}">
-                        <label for="datetime">Date</label>
+                        <label for="date">Date</label>
                         <input type="date" class="form-control" id="date" name="date" placeholder="Date" value="{{ old('date') }}">
                         @if($errors->has('date'))
                             <span class="help-block">{{ $errors->first('date') }}</span>
+                        @endif
+                    </div>
+                    <div class="form-group{{ $errors->has('start_time') ? ' has-error' : '' }}">
+                        <label for="start_time">Start Time</label>
+                        <input type="text" class="form-control" id="start_time" name="start_time" placeholder="Start Time" value="{{ old('start_time') }}">
+                        @if($errors->has('start_time'))
+                            <span class="help-block">{{ $errors->first('start_time') }}</span>
+                        @endif
+                    </div>
+                    <div class="form-group{{ $errors->has('end_time') ? ' has-error' : '' }}">
+                        <label for="end_time">End Time</label>
+                        <input type="text" class="form-control" id="end_time" name="end_time" placeholder="End Time" value="{{ old('end_time') }}">
+                        @if($errors->has('end_time'))
+                            <span class="help-block">{{ $errors->first('end_time') }}</span>
                         @endif
                     </div>
                     <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">

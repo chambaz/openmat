@@ -11,6 +11,9 @@
 |
 */
 
+use Illuminate\Http\Request;
+use Faker\Generator as Faker;
+
 Auth::routes();
 
 Route::get('/', function () {
@@ -23,3 +26,22 @@ Route::get('/submit', function () {
 });
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::post('/submit', function (Request $request, Faker $faker) {
+    $data = $request->validate([
+        'title' => 'required|max:255',
+        'description' => 'required|max:255',
+        'school' => 'required|max:255',
+        'address' => 'required|max:255',
+        'date' => 'required|date',
+        'start_time' => 'required',
+        'end_time' => 'required'
+    ]);
+
+    $data['latitude'] = $faker->latitude();
+    $data['longitude'] = $faker->longitude();
+
+    $event = tap(new App\Event($data))->save();
+
+    return redirect('/');
+});
