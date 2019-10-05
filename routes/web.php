@@ -12,7 +12,8 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $events = \App\Event::all();
+    return view('listing', ['events' => $events]);
 });
 
 Auth::routes();

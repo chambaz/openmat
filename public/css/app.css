@@ -10644,3 +10644,11 @@ a.text-dark:focus {
   }
 }
 
+.card {
+  margin-bottom: 40px;
+}
+
+.card:first-child {
+  margin-top: 20px;
+}
+
