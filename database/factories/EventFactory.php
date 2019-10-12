@@ -4,9 +4,13 @@
 
 use App\Event;
 use Faker\Generator as Faker;
+use Illuminate\Support\Facades\DB;
 
 $factory->define(Event::class, function (Faker $faker) {
+    $randomUser = DB::table('users')->inRandomOrder()->first();
+
     return [
+        'user_id' => $randomUser->id,
         'title' => substr($faker->sentence(2), 0, -1),
         'description' => $faker->paragraph,
         'school' => substr($faker->sentence(2), 0, -1),
