@@ -28,6 +28,8 @@ Route::get('/submit', function () {
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::post('/submit', function (Request $request, Faker $faker) {
+    $user = Auth::user();
+
     $data = $request->validate([
         'title' => 'required|max:255',
         'description' => 'required|max:255',
@@ -38,6 +40,7 @@ Route::post('/submit', function (Request $request, Faker $faker) {
         'end_time' => 'required'
     ]);
 
+    $data['user_id'] = $user->id;
     $data['latitude'] = $faker->latitude();
     $data['longitude'] = $faker->longitude();
 
