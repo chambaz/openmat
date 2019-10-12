@@ -12,6 +12,10 @@
                     @endif
 
                     {!! csrf_field() !!}
+                    <div class="form-group">
+                        <label for="title">File upload</label>
+                        <div id="file" class="dropzone"></div> 
+                    </div> 
                     <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
                         <label for="title">Title</label>
                         <input type="text" class="form-control" id="title" name="title" placeholder="Title" value="{{ old('title') }}">
@@ -66,4 +70,17 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('scripts')
+  <script>
+    var drop = new Dropzone('#file', {
+      createImageThumbnails: false,
+      addRemoveLinks: true,
+      url: '/file',
+      headers: {
+        'X-CSRF-TOKEN': document.head.querySelector('meta[name="csrf-token"]').content
+      }
+    });
+  </script>
 @endsection
