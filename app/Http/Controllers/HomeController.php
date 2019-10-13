@@ -25,7 +25,7 @@ class HomeController extends Controller
     public function index()
     {
         $user = \Auth::user();
-        $events = DB::table('events')->where('user_id', $user->id)->get();
+        $events = DB::table('events')->where('user_id', $user->id)->orderBy('date', 'desc')->get();
         return view('home', ['events' => $events]);
     }
 }

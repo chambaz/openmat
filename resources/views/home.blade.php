@@ -8,6 +8,10 @@
             <div class="card">
                 <div class="card-header">{{ $event->title }}</div>
 
+                @if ($event->image)
+                <img src="/{{ $event->image }}" />
+                @endif
+
                 <div class="card-body">
                     {{ $event->description }}
                 </div>
