@@ -41,11 +41,13 @@ class SubmitController extends Controller
         
         $user = \Auth::user();
         $image = $request->file('image')->store('public/covers');
+
+        $geocode = \Geocoder::getCoordinatesForAddress($data['address']);
         
         $data['image'] = str_replace('public', 'storage', $image);
         $data['user_id'] = $user->id;
-        $data['latitude'] = $faker->latitude();
-        $data['longitude'] = $faker->longitude();
+        $data['latitude'] = $geocode['lat'];
+        $data['longitude'] = $geocode['lng'];
 
         $event = tap(new \App\Event($data))->save();
 
