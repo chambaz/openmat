@@ -13,38 +13,15 @@
 
 use Illuminate\Http\Request;
 use Faker\Generator as Faker;
+use Illuminate\Support\Facades\DB;
 
 Auth::routes();
 
 Route::get('/', function () {
-    $events = \App\Event::all();
+    $events = DB::table('events')->orderBy('date', 'desc')->get();
     return view('listing', ['events' => $events]);
 });
 
-Route::get('/submit', function () {
-    return view('submit');
-});
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-Route::post('/submit', function (Request $request, Faker $faker) {
-    $user = Auth::user();
-
-    $data = $request->validate([
-        'title' => 'required|max:255',
-        'description' => 'required|max:255',
-        'school' => 'required|max:255',
-        'address' => 'required|max:255',
-        'date' => 'required|date',
-        'start_time' => 'required',
-        'end_time' => 'required'
-    ]);
-
-    $data['user_id'] = $user->id;
-    $data['latitude'] = $faker->latitude();
-    $data['longitude'] = $faker->longitude();
-
-    $event = tap(new App\Event($data))->save();
-
-    return redirect('/');
-});
+Route::get('/home', 'HomeController@index');
+Route::get('/submit', 'SubmitController@index');
+Route::post('/submit', 'SubmitController@create');

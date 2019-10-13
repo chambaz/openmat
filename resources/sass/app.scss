@@ -7,18 +7,39 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
-// Dropzone
-@import '~dropzone/dist/min/dropzone.min.css';
-
-.dropzone {
-    margin-bottom: 20px;
-    min-height: auto;
-}
-
 .card {
     margin-bottom: 40px;
 }
 
 .card:first-child {
     margin-top: 20px;
+}
+
+.form {
+    margin-top: 40px;
+}
+
+.file-upload {
+    background: $gray;
+    color: $black;
+    cursor: pointer;
+    display: inline-flex;
+    margin-left: 20px;
+    overflow: hidden;
+    padding: 10px 20px;
+    position: relative;
+}
+
+.file-upload input[type='file'] {
+    cursor: pointer;
+    display: block;
+    font-size: 999px;
+    filter: alpha(opacity=0);
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    position: absolute;
+    right: 0;
+    text-align: right;
+    top: 0;
 }

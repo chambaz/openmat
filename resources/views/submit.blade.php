@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-md-8">
                 <h1>Submit an event</h1>
-                <form action="/submit" method="post">
+                <form class="form" action="/submit" method="post" enctype="multipart/form-data">
                     @if ($errors->any())
                         <div class="alert alert-danger" role="alert">
                             Please fix the following errors
@@ -13,8 +13,11 @@
 
                     {!! csrf_field() !!}
                     <div class="form-group">
-                        <label for="title">File upload</label>
-                        <div id="file" class="dropzone"></div> 
+                        <label for="title">Cover Image</label>
+                        <label class="file-upload" for="file">
+                            Upload files
+                            <input name="image" type="file"/>
+                        </label>
                     </div> 
                     <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
                         <label for="title">Title</label>
@@ -70,17 +73,4 @@
             </div>
         </div>
     </div>
-@endsection
-
-@section('scripts')
-  <script>
-    var drop = new Dropzone('#file', {
-      createImageThumbnails: false,
-      addRemoveLinks: true,
-      url: '/file',
-      headers: {
-        'X-CSRF-TOKEN': document.head.querySelector('meta[name="csrf-token"]').content
-      }
-    });
-  </script>
 @endsection
