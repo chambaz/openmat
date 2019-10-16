@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\DB;
 Auth::routes();
 
 Route::get('/', function() {
-    $events = DB::table('events')->orderBy('date', 'desc')->get();
+    $events = App\Event::with('user')->orderBy('date', 'desc')->get();
     return view('listing', ['events' => $events]);
 });
 
