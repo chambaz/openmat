@@ -19,4 +19,11 @@ class Event extends Model
         'start_time',
         'end_time'
     ];
+
+    /**
+     * Get the post that owns the comment.
+     */
+    public function user() {
+        return $this->belongsTo('App\User');
+    }
 }
