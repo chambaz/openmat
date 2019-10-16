@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\DB;
 
 Auth::routes();
 
-Route::get('/', function () {
+Route::get('/', function() {
     $events = DB::table('events')->orderBy('date', 'desc')->get();
     return view('listing', ['events' => $events]);
 });
@@ -25,3 +25,8 @@ Route::get('/', function () {
 Route::get('/home', 'HomeController@index');
 Route::get('/submit', 'SubmitController@index');
 Route::post('/submit', 'SubmitController@create');
+
+Route::get('/api/events', function() {
+    $events = App\Event::with('user')->get();
+    return response()->json($events);
+});
