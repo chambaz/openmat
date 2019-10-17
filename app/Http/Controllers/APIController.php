@@ -19,11 +19,10 @@ class APIController extends Controller
         $lng = $request->input('lng');
         $miles = $request->input('radius', 100);
 
-        $events = DB::select("
-            SELECT * FROM events WHERE
-            events.latitude BETWEEN ({$lat} - ({$miles}*0.018)) AND ({$lat} + ({$miles}*0.018)) AND
-            events.longitude BETWEEN ({$lng} - ({$miles}*0.018)) AND ({$lng} + ({$miles}*0.018));
-        ");
+        $events = DB::table('events')
+            ->whereBetween('latitude', [$lat - ($miles * 0.018), $lat + ($miles * 0.018)])
+            ->whereBetween('longitude', [$lng - ($miles * 0.018), $lng + ($miles * 0.018)])
+            ->get();
 
         return response()->json($events);
     }
