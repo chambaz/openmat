@@ -17,15 +17,21 @@ class APIController extends Controller
 
         $lat = $request->input('lat');
         $lng = $request->input('lng');
+        $query = $request->input('q', false);
         $date = $request->input('date', date('Y-m-d'));
         $miles = $request->input('radius', 100);
 
         $events = DB::table('events')
             ->where('date', '>=', $date)
             ->whereBetween('latitude', [$lat - ($miles * 0.018), $lat + ($miles * 0.018)])
-            ->whereBetween('longitude', [$lng - ($miles * 0.018), $lng + ($miles * 0.018)])
-            ->get();
+            ->whereBetween('longitude', [$lng - ($miles * 0.018), $lng + ($miles * 0.018)]);
+        
+        if ($query) {
+            $events = $events
+                ->where('school', 'like', "%{$query}%")
+                ->orWhere('title', 'like', "%{$query}%");
+        }
 
-        return response()->json($events);
+        return response()->json($events->get());
     }
 }
