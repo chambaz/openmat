@@ -25,4 +25,4 @@ Route::get('/', function() {
 Route::get('/home', 'HomeController@index');
 Route::get('/submit', 'SubmitController@index');
 Route::post('/submit', 'SubmitController@create');
-Route::get('/api/events', 'APIController@index');
+Route::get('/api/events', 'APIController@events');
