@@ -14,6 +14,8 @@
                 
                 <div class="card-body">
                     {{ $event->description }}
+
+                    <p style="margin-top: 20px;"><a href="/events/{{ $event->slug }}">View event</a></p>
                 </div>
             </div>
             @endforeach

@@ -18,8 +18,20 @@ use Illuminate\Support\Facades\DB;
 Auth::routes();
 
 Route::get('/', function() {
-    $events = App\Event::with('user')->orderBy('date', 'desc')->get();
+    $events = App\Event::orderBy('date', 'desc')->get();
     return view('listing', ['events' => $events]);
+});
+
+Route::get('/events/{slug}', function($slug) {
+    $event = App\Event::where('slug', $slug)
+        ->orderBy('date', 'desc')
+        ->first();
+
+    if (!$event) {
+        abort(404);
+    }
+
+    return view('single', ['event' => $event]);
 });
 
 Route::get('/home', 'HomeController@index');
