@@ -17,9 +17,29 @@ use Illuminate\Support\Facades\DB;
 
 Auth::routes();
 
-Route::get('/', function() {
-    $events = App\Event::orderBy('date', 'desc')->get();
-    return view('listing', ['events' => $events]);
+Route::get('/', function(Request $request) {
+    $lat = $request->input('lat');
+    $lng = $request->input('lng');
+    $query = $request->input('q', false);
+    $date = $request->input('date', date('Y-m-d'));
+    $miles = $request->input('radius', 100);
+
+    $events = DB::table('events')
+        ->where('date', '>=', $date);
+
+    if ($lat && $lng) {
+        $events = $events
+            ->whereBetween('latitude', [$lat - ($miles * 0.018), $lat + ($miles * 0.018)])
+            ->whereBetween('longitude', [$lng - ($miles * 0.018), $lng + ($miles * 0.018)]);
+    }
+
+    if ($query) {
+        $events = $events
+            ->where('school', 'like', "%{$query}%")
+            ->orWhere('title', 'like', "%{$query}%");
+    }
+
+    return view('listing', ['events' => $events->get()]);
 });
 
 Route::get('/events/{slug}', function($slug) {
