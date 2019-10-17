@@ -31,6 +31,7 @@ class SubmitController extends Controller
         $data = $request->validate([
             'image' => 'image',
             'title' => 'required|max:255',
+            'url' => 'url',
             'description' => 'max:255',
             'school' => 'required|max:255',
             'address' => 'required|max:255',

@@ -26,6 +26,13 @@
                             <span class="help-block">{{ $errors->first('title') }}</span>
                         @endif
                     </div>
+                    <div class="form-group{{ $errors->has('url') ? ' has-error' : '' }}">
+                        <label for="url">URL</label>
+                        <input type="url" class="form-control" id="url" name="url" placeholder="URL" value="{{ old('url') }}">
+                        @if($errors->has('url'))
+                            <span class="help-block">{{ $errors->first('url') }}</span>
+                        @endif
+                    </div>
                     <div class="form-group{{ $errors->has('date') ? ' has-error' : '' }}">
                         <label for="date">Date</label>
                         <input type="date" class="form-control" id="date" name="date" placeholder="Date" value="{{ old('date') }}">
