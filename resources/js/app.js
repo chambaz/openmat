@@ -31,5 +31,26 @@ Vue.component(
  */
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    data: {
+        location: null
+    },
+    mounted: function () {
+        if (window.location.pathname === '/') {
+            console.log('Check geolocation')
+
+            if (!('geolocation' in navigator)) {
+                alert('1Unable to retrieve current location')
+                return;
+            }
+
+            navigator.geolocation.getCurrentPosition(pos => {
+                this.location = pos;
+                console.log(this.location)
+            }, err => {
+                console.log(err)
+                alert('2Unable to retrieve current location')
+            })
+        }
+    }
 })

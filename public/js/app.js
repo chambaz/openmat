@@ -49357,7 +49357,30 @@ Vue.component('example-component', __webpack_require__(/*! ./components/ExampleC
  */
 
 var app = new Vue({
-  el: '#app'
+  el: '#app',
+  data: {
+    location: null
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    if (window.location.pathname === '/') {
+      console.log('Check geolocation');
+
+      if (!('geolocation' in navigator)) {
+        alert('1Unable to retrieve current location');
+        return;
+      }
+
+      navigator.geolocation.getCurrentPosition(function (pos) {
+        _this.location = pos;
+        console.log(_this.location);
+      }, function (err) {
+        console.log(err);
+        alert('2Unable to retrieve current location');
+      });
+    }
+  }
 });
 
 /***/ }),
