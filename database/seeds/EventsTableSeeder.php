@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 
 class EventsTableSeeder extends Seeder
 {
@@ -16,6 +17,7 @@ class EventsTableSeeder extends Seeder
         DB::table('events')->insert([
             'user_id' => 1,
             'title' => 'This is a test event',
+            'slug' => substr(sha1(time()), 0, 10).'-'.Str::slug('This is a test event'),
             'url' => 'http://www.roninbrazilianjiujitsu.com/',
             'description' => 'This is the description...',
             'school' => 'Ronin BJJ',
@@ -30,6 +32,7 @@ class EventsTableSeeder extends Seeder
         DB::table('events')->insert([
             'user_id' => $randomUser->id,
             'title' => 'This is another test event',
+            'slug' => substr(sha1(time()), 0, 10).'-'.Str::slug('This is another test event'),
             'url' => 'http://soulcraftbjj.com/',
             'description' => 'This is the description...',
             'school' => 'Soulcraft',
