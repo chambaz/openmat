@@ -17,6 +17,7 @@ class CreateEventsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
             $table->string('title');
+            $table->string('slug');
             $table->string('url')->nullable();
             $table->text('description')->nullable();
             $table->string('image')->nullable();
