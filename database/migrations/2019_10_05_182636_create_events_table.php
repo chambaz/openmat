@@ -21,8 +21,8 @@ class CreateEventsTable extends Migration
             $table->string('image')->nullable();
             $table->string('school');
             $table->string('address');
-            $table->string('latitude');
-            $table->string('longitude');
+            $table->float('latitude', 10, 6);
+            $table->float('longitude', 10, 6);
             $table->date('date');
             $table->time('start_time');
             $table->time('end_time');
