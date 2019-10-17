@@ -6,7 +6,7 @@
         <div class="col-md-8">
             @foreach ($events as $event)
             <div class="card">
-                <div class="card-header">{{ $event->title }}</div>
+                <div class="card-header">{{ $event->date }}: {{ $event->title }}</div>
 
                 @if ($event->image)
                 <img src="/{{ $event->image }}" />
