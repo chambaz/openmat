@@ -12,6 +12,7 @@ $factory->define(Event::class, function (Faker $faker) {
     return [
         'user_id' => $randomUser->id,
         'title' => substr($faker->sentence(2), 0, -1),
+        'url' => 'https://www.google.com',
         'description' => $faker->paragraph,
         'school' => substr($faker->sentence(2), 0, -1),
         'address' => $faker->address,
